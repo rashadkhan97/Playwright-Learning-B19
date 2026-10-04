@@ -20,13 +20,17 @@ The repo is organized in parts, each one pushed as progress is made. This README
 ## Project Structure
 
 ```
-tests/
-  example.spec.ts       # default Playwright starter test (playwright.dev site)
-  practice.spec.ts      # practice tests: login, double click, right click, dialogs
-playwright.config.ts        # main config (chromium project, baseURL, storageState)
-playwright-debug.config.ts  # debug-focused config (headed, slowMo, single worker, html+json reporters)
-auth.json                   # saved login session (storageState) — gitignored
-.github/workflows/playwright.yml  # CI workflow running tests on push/PR to main/master
+playwright-practice-b19/
+├── .github/
+│   └── workflows/
+│       └── playwright.yml        # CI: runs tests on push/PR to main/master, uploads HTML report
+├── tests/
+│   ├── example.spec.ts           # default Playwright starter test (playwright.dev site)
+│   └── practice.spec.ts          # practice tests: login, double click, right click, dialogs
+├── playwright.config.ts          # main config — chromium project, baseURL, storageState
+├── playwright-debug.config.ts    # debug config — headed, slowMo, single worker, html+json reporters
+├── auth.json                     # saved login session (storageState) — gitignored
+└── README.md
 ```
 
 ## Part 1 — Notes
