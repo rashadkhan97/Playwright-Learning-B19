@@ -67,8 +67,7 @@ export class CreateUserPage{
         await this.birthdateInput.press("Enter");
 
         await this.districtSelect.selectOption(user.district);
-        // gender from data, not the hardcoded "Male" locator
-        await this.page.getByRole("radio", {name: user.gender, exact:true}).check();
+        await this.genderSelect.check();
         await this.checkBoxSelect.check();
         await this.photoUrlInput.setInputFiles(user.photoUrl);
         await this.createUserButton.click();

@@ -1,4 +1,4 @@
-import {Page, Locator} from "@playwright/test";
+import {Page, Locator, expect} from "@playwright/test";
 
 export class LoginPage{
     //declearing properties
@@ -18,14 +18,13 @@ export class LoginPage{
 
     }
 
-    async goto(){
-        await this.page.goto("/"); // baseURL defined in playwright.config.ts
-    }
-
     async login(email:string, password:string){
+        await this.page.goto("/"); // baseURL defined in playwright.config.ts
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
+        // wait for Profile heading, so login is finished before returning
+        await expect(this.profileHeading).toContainText('Profile');
     }
 
 }
