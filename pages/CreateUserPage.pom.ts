@@ -1,5 +1,6 @@
 import {Page, Locator} from "@playwright/test";
 
+// shape of the test data; user.spec.ts builds an object of this type and passes it to createUser()
 export interface UserModel{
     firstName:string,
     lastName:string,
@@ -12,8 +13,9 @@ export interface UserModel{
     photoUrl:string
 }
 
+// POM for /dashboard/add-user form. Used by tests/user.spec.ts
 export class CreateUserPage{
-    //declearing properties 
+    //declearing properties
     readonly page:Page;
     readonly firstNameInput:Locator;
     readonly lastNameInput:Locator;
@@ -28,7 +30,7 @@ export class CreateUserPage{
     readonly photoUrlInput:Locator;
     readonly createUserButton:Locator;
 
-    //constructor
+    //constructor: receives page from the test, builds all form locators once
     constructor(page:Page){
         this.page = page;
         this.firstNameInput= page.getByRole("textbox", {name: "John", exact:true});
@@ -46,6 +48,7 @@ export class CreateUserPage{
 
     }
 
+    // fills whole form from UserModel data, then submits
     async createUser(user:UserModel){
         await this.firstNameInput.fill(user.firstName);
         await this.lastNameInput.fill(user.lastName);

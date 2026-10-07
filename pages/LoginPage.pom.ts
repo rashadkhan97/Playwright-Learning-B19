@@ -1,14 +1,15 @@
 import {Page, Locator, expect} from "@playwright/test";
 
+// POM for login screen. Used by tests/auth.setup.ts to log in once and save auth.json
 export class LoginPage{
     //declearing properties
     readonly page:Page;
     readonly emailInput:Locator;
     readonly passwordInput:Locator;
     readonly loginButton:Locator;
-    readonly profileHeading:Locator;
+    readonly profileHeading:Locator; // shown only after successful login, used as the "login done" signal
 
-    //constructor
+    //constructor: receives page from the test/setup file, builds all locators once
     constructor(page:Page){
         this.page = page;
         this.emailInput=page.getByRole("textbox", {name: "you@example.com"});
@@ -18,6 +19,7 @@ export class LoginPage{
 
     }
 
+    // full login flow, called from auth.setup.ts
     async login(email:string, password:string){
         await this.page.goto("/"); // baseURL defined in playwright.config.ts
         await this.emailInput.fill(email);
